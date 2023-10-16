@@ -1,0 +1,28 @@
+{% extends 'index.html'%}
+{% block title%}
+<title>Submit Form</title>
+{% endblock %}
+{% block content %}
+<div class="forms">
+<form  action="{% url 'forms' %}" method="POST">
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Name</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" name="name" >
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="description"></textarea>
+    </div>
+    <div class="mb-3">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+  </form>
+</div>
+<style>
+    form{
+        margin: 15px 30px;
+    }
+    
+</style>
+{% endblock %}

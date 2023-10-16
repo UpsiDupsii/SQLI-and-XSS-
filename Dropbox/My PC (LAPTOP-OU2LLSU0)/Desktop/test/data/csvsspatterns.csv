@@ -1,0 +1,476 @@
+id,message,matchers_type,extractors_type,status,matchers_part,extractors_part,pattern,input case,severity,path,cwe id,cve id,cvss metrics,cvss score,cpe,refrences,collected refrence
+api_native_code,Loading Native Code (Shared Library),Regex,,,,,System\.loadLibrary\(|System\.load\(,exact,info,,,,,,,,mobsf
+api_get_system_service,Get System Service,Regex,,,,,getSystemService,exact,info,,,,,,,,
+api_get_running_app_processes,Get Running App Processes,Regex,,,,,getRunningAppProcesses\(,exact,info,,,,,,,,
+api_dexloading,Dynamic Class and Dexloading,RegexOr,,,,,""" - dalvik\.system\.DexClassLoader
+    - java\.security\.ClassLoader
+    - java\.net\.URLClassLoader
+    - java\.security\.SecureClassLoader
+    - \.loadClass\(
+    - PathClassLoader\(
+    - DexClassLoader\(
+    - InMemoryDexClassLoader\( """,exact,info,,,,,,,,
+api_java_reflection,Java Reflection,RegexOr,,,,,"""- java\.lang\.reflect\.G6Method
+    - java\.lang\.reflect\.Field
+    - Class\.forName""",exact,info,,,,,,,,
+api_crypto,Crypto,RegexOr,,,,,"""- javax\.crypto
+    - kalium\.crypto
+    - bouncycastle\.crypto
+    - EncryptedFile\.FileEncryptionScheme
+    - MessageDigest\.getInstance\(
+    - Signature\.getInstance\(
+    - Cipher\.getInstance\( """,exact,info,,,,,,,,
+api_start_activity,Starting Activity,RegexOr,,,,,"""- startActivity\(
+    - startActivityForResult\(""",exact,info,,,,,,,,
+api_start_service,Starting Service,RegexOr,,,,,"""- startService\(
+    - bindService\(""",exact,info,,,,,,,,
+api_send_broadcast,Sending Broadcast,RegexOr,,,,,"""- sendBroadcast\(
+    - sendOrderedBroadcast\(
+    - sendStickyBroadcast\(""",exact,info,,,,,,,,
+api_local_file_io,Local File I/O Operations,RegexOr,,,,,"""- OpenFileOutput
+    - OpenFileInput
+    - openFileInput
+    - openFileOutput
+    - getSharedPreferences
+    - SharedPreferences\.Editor
+    - getCacheDir
+    - getExternalStorageState
+    - openOrCreateDatabase
+    - new File\(
+    - import java\.io\.
+    - import java\.nio\.file
+    - import java\.util\.Scanner""",exact,info,,,,,,,,
+api_ipc,Inter Process Communication,RegexOr,,,,,"""- IRemoteService\.Stub
+    - IBinder
+    - Intent""",exact,info,,,,,,,,
+api_web,"HTTP Requests, Connections and Sessions'",RegexOr,,,,,"""- http\.client\.HttpClient
+    - net\.http\.AndroidHttpClient
+    - http\.impl\.client\.AbstractHttpClient""",exact,info,,,,,,,,
+api_http_connection,HTTP Connection,RegexAnd,,,,,"""- HttpURLConnection|org\.apache\.http
+    - openConnection|connect|HttpRequest""",exact,info,,,,,,,,
+api_dex_manipulate,Load and Manipulate Dex Files,RegexAnd,,,,,"""- >-
+      dalvik\.system\.PathClassLoader|dalvik\.system\.DexFile|dalvik\.system\.DexPathList
+    - loadDex|loadClass|DexClassLoader|loadDexFile""",exact,info,,,,,,,,
+api_content_provider,Content Provider,Regex,,,,,"""android\.content\.ContentProvider""",exact,info,,,,,,,,
+api_obfuscation,Obfuscation,RegexAnd,,,,,"""- utils\.AESObfuscator
+    - getObfuscator""",exact,info,,,,,,,,
+api_os_command,Execute OS Command,RegexAnd,,,,,"""- \.exec\(
+    - getRuntime\( """,exact,info,,,,,,,,
+api_kill_process,Kill Process,RegexOr,,,,,"""- Process\.killProcess\(
+    - \.killBackgroundProcesses\(""",exact,info,,,,,,,,
+api_keystore,Android Keystore,RegexAnd,,,,,"""- security\.KeyStore
+    - Keystore\.getInstance\(""",exact,info,,,,,,,,
+api_tcp_server,TCP Server Socket,RegexAnd,,,,,"""- ServerSocket
+    - net\.ServerSocket""",exact,info,,,,,,,,
+api_tcp,TCP Socket,RegexAnd,,,,,"""- Socket
+    - net\.Socket""",exact,info,,,,,,,,
+api_udp_datagram,UDP Datagram Packet,RegexAnd,,,,,"""- DatagramPacket
+    - net\.DatagramPacket""",exact,info,,,,,,,,
+api_udp_datagram_socket,UDP Datagram Socket,RegexAnd,,,,,"""- DatagramSocket
+    - net\.DatagramSocket""",exact,info,,,,,,,,
+api_webview,WebView JavaScript Interface,RegexAnd,,,,,"""- addJavascriptInterface
+    - WebView
+    - android\.webkit""",exact,info,,,,,,,,
+api_webview_get,WebView GET Request,RegexAnd,,,,,"""- WebView
+    - loadData
+    - android\.webkit""",exact,info,,,,,,,,
+api_webview_post,WebView POST Request,RegexAnd,,,,,"""- WebView
+    - postUrl
+    - android\.webkit""",exact,info,,,,,,,,
+api_notifications,Android Notifications,RegexAnd,,,,,"""- app\.NotificationManager
+    - notify""",exact,info,,,,,,,,
+api_get_cell,Get Cell Information,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getAllCellInfo""",exact,info,,,,,,,,
+api_get_location,Get Cell Location,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getCellLocation""",exact,info,,,,,,,,
+api_get_subscriber,Get Subscriber ID,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getSubscriberId""",exact,info,,,,,,,,
+api_get_device,"Get Device ID, IMEI,MEID/ESN etc'",RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getDeviceId
+    - getImei\(
+    - getMeid\(""",exact,info,,,,,,,,
+api_get_soft,"Get Software Version, IMEI/SV etc'",RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getDeviceSoftwareVersion""",exact,info,,,,,,,,
+api_get_sim_serial,Get SIM Serial Number,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getSimSerialNumber""",exact,info,,,,,,,,
+api_get_sim_provider,Get SIM Provider Details,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getSimOperator""",exact,info,,,,,,,,
+api_get_sim_operator,Get SIM Operator Name,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getSimOperatorName""",exact,info,,,,,,,,
+api_get_phone,Get Phone Number,RegexAnd,,,,,"""- telephony\.TelephonyManager
+    - getLine1Number""",exact,info,,,,,,,,
+api_sms_call,"Query Database of SMS, Contacts etc'",RegexAnd,,,,,"""- content\.ContentResolver
+    - query""",exact,info,,,,,,,,
+api_hide_app_icon,Hide application icon,RegexAnd,,,,,"""- \.setComponentEnabledSetting\(
+    - COMPONENT_ENABLED_STATE_DISABLED""",exact,info,,,,,,,,
+api_send_sms,Send SMS,RegexAndOr,,,,,"""- telephony\.SmsManager
+    - - sendMultipartTextMessage
+      - sendTextMessage
+      - vnd\.android-dir\/mms-sms""",exact,info,,,,,,,,
+api_url,URL Connection to file/http/https/ftp/jar,RegexAndOr,,,,,"""- net\.URLConnection
+    - - openConnection
+      - connect
+      - openStream""",exact,info,,,,,,,,
+api_jar_url,JAR URL Connection,RegexAndOr,,,,,"""- net\.JarURLConnection
+    - - JarURLConnection
+      - 'jar:'""",exact,info,,,,,,,,
+api_https_connection,HTTPS Connection,RegexAndOr,,,,,"""- javax\.net\.ssl\.HttpsURLConnection
+    - - HttpsURLConnection
+      - connect""",exact,info,,,,,,,,
+api_clipboard,Set or Read Clipboard data,RegexAndOr,,,,,"""- content\.ClipboardManager
+    - - CLIPBOARD_SERVICE
+      - ClipboardManager""",exact,info,,,,,,,,
+api_base64_encode,Base64 Encode,RegexAndOr,,,,,"""- android\.util\.Base64
+    - - \.encodeToString
+      - \.encode""",exact,info,,,,,,,,
+api_base64_decode,Base64 Decode,RegexAndOr,,,,,"""- android\.util\.Base64
+    - - \.decodeToString
+      - \.decode""",exact,info,,,,,,,,
+api_message_digest,Message Digest,RegexAndOr,,,,,"""- java\.security\.MessageDigest
+    - - MessageDigestSpi
+      - MessageDigest""",exact,info,,,,,,,,
+api_gps,GPS Location,RegexAndOr,,,,,"""- android\.location
+    - - getLastKnownLocation\(
+      - requestLocationUpdates\(
+      - getLatitude\(
+      - getLongitude\(""",exact,info,,,,,,,,
+api_installed,Get Installed Applications,RegexAndOr,,,,,"""- getPackageManager\(
+    - - queryIntentActivities\(
+      - getInstalledApplications\(
+      - getInstalledPackages\(""",exact,info,,,,,,,,
+api_get_wifi,Get WiFi Details,RegexAndOr,,,,,"""- wifi\.WifiManager
+    - - getConnectionInfo\(
+      - getSSID\(
+      - getConfiguredNetworks\(
+      - getNetworkId\(
+      - getIpAddress\(
+      - getMacAddress\(""",exact,info,,,,,,,,
+api_get_network,Get Network Interface information,RegexAndOr,,,,,"""- NetworkInterface
+    - - getNetworkInterfaces\(
+      - getInetAddresses\(
+      - getHostAddress\(""",exact,info,,,,,,,,
+api_get_advertising,Get Android Advertising ID,RegexAndOr,,,,,"""- AdvertisingIdClient
+    - - getAdvertisingIdInfo\(
+      - getAdvertisingId\(""",exact,info,,,,,,,,
+api_certificate_handling,Certificate Handling,Regex,,,,,"""\.SSLSocketFactory""",exact,info,,,,,,,,
+android_ip_disclosure,IP Address disclosure,IP Address disclosure,,,,,"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\""'",exact,warning,,cwe-200,,4.3,,,,
+android_hiddenui,""">-
+    Hidden elements in view can be used to hide data from user. But this data
+    can be leaked""",Regex,,,,,"""setVisibility\(View\.GONE\)|setVisibility\(View\.INVISIBLE\)""",exact,high,,cwe-919,,4.3,,,,
+android_insecure_ssl,""">-
+    Insecure Implementation of SSL. Trusting all the certificates or accepting
+    self signed certificates is a critical Security Hole. This application is
+    vulnerable to MITM attacks""",RegexAnd,,,,,"""- javax\.net\.ssl
+    - >-
+      TrustAllSSLSocket-Factory|AllTrustSSLSocketFactory|NonValidatingSSLSocketFactory|net\.SSLCertificateSocketFactory|ALLOW_ALL_HOSTNAME_VERIFIER|\.setDefaultHostnameVerifier\(|NullHostnameVerifier\(""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#android-network-apis,cwe-295,,7.4,,,,
+android_webview_external,">-
+    WebView load files from external storage. Files in external storage can be
+    modified by any application.",RegexAnd,,,,,"""- \.loadUrl\(.{0,48}getExternalStorageDirectory\(
+    - webkit\.WebView""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#static-analysis-7,cwe-919,,5.0,,,,
+android_write_app_dir,"""App can write to App Directory. Sensitive Information should be encrypted.""",RegexOr,,,,,"""- MODE_PRIVATE
+    - Context\.MODE_PRIVATE""",exact,info,,cwe-276,,3.6,,,,
+android_insecure_random,The App uses an insecure Random Number Generator.,Regex,,,,,"""java\.util\.Random(?!Access)""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#weak-random-number-generators,cwe-330,,7.5,,,,
+android_logging,The App logs information. Sensitive information should never be logged.,Regex,,,,,"""Log\.(v|d|i|w|e|f|s)|System\.out\.print|System\.err\.print""",exact,info,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#logs,cwe-532,,7.5,,,,
+android_sql_cipher,This App uses SQL Cipher. Ensure that secrets are not hardcoded in code.,Regex,,,,,"""SQLiteOpenHelper\.getWritableDatabase\(""",exact,info,,',,0.0,,,,
+android_tapjacking,This app has capabilities to prevent tapjacking attacks.,Regex,,,,,"""setFilterTouchesWhenObscured\(true\)""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-overlay-attacks-mstg-platform-9,',,0.0,,,,
+android_read_write_external,">-
+    App can read/write to External Storage. Any App can read data written to
+    External Storage.",RegexOr,,,,,"""- \.getExternalStorage
+    - \.getExternalFilesDir\(""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#external-storage,cwe-276,,5.5,,,,
+android_temp_file,">-
+    App creates temp file. Sensitive information should never be written into a
+    temp file.",Regex,,,,,"""\.createTempFile\(""",exact,warning,,cwe-276,,5.5,,,,
+android_webview,">-
+    Insecure WebView Implementation. Execution of user controlled code in
+    WebView is a critical Security Hole.",RegexAnd,,,,,"""- setJavaScriptEnabled\(true\)
+    - addJavascriptInterface\(""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-javascript-execution-in-webviews-mstg-platform-5,cwe-749,,8.8,,,,
+android_sql_cipher_aes256,">-
+    This App uses SQL Cipher. SQLCipher provides 256-bit AES encryption to
+    sqlite database files.",RegexAnd,,,,,"""- SQLiteDatabase\.loadLibs\(
+    - net\.sqlcipher\.""",exact,info,,',,0.0,,,,
+android_download_manager,This App download files using Android Download Manager,RegexAnd,,,,,"""- android\.app\.DownloadManager
+    - getSystemService\(DOWNLOAD_SERVICE\)""",exact,info,,',,0.0,,,,
+android_db_encryption,This App use Realm Database with encryption.,RegexAnd,,,,,"""- io\.realm\.Realm
+    - \.encryptionKey\(""",exact,good,,',,0.0,,,,
+android_webview_debug,Remote WebView debugging is enabled.,RegexAnd,,,,,"""- \.setWebContentsDebuggingEnabled\(true\)
+    - WebView""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#debugging-and-tracing,cwe-919,,5.4,,,,
+android_aar_jar_debug_enabled,Debug configuration enabled. Production builds must not be debuggable.,RegexAnd,,,,,"""- ' class BuildConfig'
+    - DEBUG.{1,25}?true""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#debugging-and-tracing,cwe-919,,5.4,,,,
+android_clipboard_listen,">-
+    This app listens to Clipboard changes. Some malware also listen to
+    Clipboard changes.",RegexAnd,,,,,"""- content\.ClipboardManager
+    - OnPrimaryClipChangedListener""",exact,info,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04b-Mobile-App-Security-Testing.md#clipboard,',,0.0,,,,
+android_clipboard_copy,">-
+    This App copies data to clipboard. Sensitive data should not be copied to
+    clipboard as other applications can access it.",RegexAnd,,,,,"""- content\.ClipboardManager
+    - setPrimaryClip\(""",exact,info,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04b-Mobile-App-Security-Testing.md#clipboard,',,0.0,,,,
+android_webview_ignore_ssl,">-
+    Insecure WebView Implementation. WebView ignores SSL Certificate errors and
+    accept any SSL Certificate. This application is vulnerable to MITM attacks",RegexAnd,,,,,"""- onReceivedSslError\(WebView
+    - \.proceed\(\);""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification,cwe-295,,7.4,,,,
+android_sql_raw_query,">-
+    App uses SQLite Database and execute raw SQL query. Untrusted user input in
+    raw SQL queries can cause SQL Injection. Also sensitive information should
+    be encrypted and written to the database.",RegexAndOr,,,,,"""- android\.database\.sqlite
+    - - rawQuery\(
+      - execSQL\(""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04h-Testing-Code-Quality.md#injection-flaws-mstg-arch-2-and-mstg-platform-2,cwe-89,,5.9,,,,
+android_detect_frida,This App detects frida server.,RegexAndOr,,,,,"""- fridaserver
+    - - '27047'
+      - REJECT
+      - LIBFRIDA""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-reverse-engineering-tools-detection-mstg-resilience-4,',,0.0,,,,
+android_ssl_pinning,">-
+    This App uses SSL certificate pinning to detect or 
+    prevent MITM attacks in secure communication channel.",RegexAndOr,,,,,"""- org\.thoughtcrime\.ssl\.pinning|\.getTrustManagers\(|TrustManagerFactory\.|CertificatePinner\.Builder\(|Retrofit\.Builder\(|Picasso\.Builder\(|\.setHostnameVerifier\(
+    - - PinningHelper\.getPinnedHttpsURLConnection|PinningHelper\.getPinnedHttpClient|PinningSSLSocketFactory\(
+      - \.setCertificateEntry\(|trustedChain|\.init\(
+      - \.add\(
+      - \.baseUrl\(
+      - \.downloader\(
+      - PinningHostnameVerifier\(|\.verify\(|DynamicPinningHostnameVerifier\(""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning-mstg-network-4,',,0.0,,,,
+android_certificate_transparency,">-
+    This App enforce TLS Certificate Transparency which helps to 
+    detect SSL certificates that have been mistakenly issued by a 
+    certificate authority or maliciously acquired from an otherwise 
+    unimpeachable certificate authority.",RegexAnd,,,,,"""- CTHostnameVerifierBuilder\(
+    - CTInterceptorBuilder\(""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning-mstg-network-4,',,0.0,,,,
+android_prevent_screenshot,">-
+    This App has capabilities to prevent against Screenshots from Recent Task
+    History/ Now On Tap etc.",RegexAndOr,,,,,"""- \.FLAG_SECURE
+    - - getWindow\(\)\.setFlags\(
+      - getWindow\(\)\.addFlags\(""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots-mstg-storage-9,',,0.0,,,,
+android_debuggable,">-
+    DexGuard Debug Detection code to detect whether an App is debuggable or not
+    is identified.",RegexAnd,,,,,"""- import dexguard\.util
+    - DebugDetector\.isDebuggable""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#debugging-and-tracing,',,0.0,,,,
+android_debugger_detect,DexGuard Debugger Detection code is identified.,RegexAnd,,,,,"""- import dexguard\.util
+    - DebugDetector\.isDebuggerConnected""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#debugging-and-tracing,',,0.0,,,,
+android_emulator_detect,DexGuard Emulator Detection code is identified.,RegexAnd,,,,,"""- import dexguard\.util
+    - EmulatorDetector\.isRunningInEmulator""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#debugging-and-tracing,',,0.0,,,,
+android_debug_sign,">-
+    DexGuard code to detect whether the App is signed with a debug key or not is
+    identified.",RegexAnd,,,,,"""- import dexguard\.util
+    - DebugDetector\.isSignedWithDebugKey""",exact,good,,',,0.0,,,,
+android_dexguard_root_detection,DexGuard Root Detection code is identified.,RegexAnd,,,,,"""- import dexguard\.util
+    - RootDetector\.isDeviceRooted""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-root-detection-mstg-resilience-1,',,0.0,,,,
+android_tamper_detect,DexGuard App Tamper Detection code is identified.,RegexAnd,,,,,"""- import dexguard\.util
+    - TamperDetector\.checkApk""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#mobile-app-tampering-and-reverse-engineering,',,0.0,,,,
+android_certificate_tamper,DexGuard Signer Certificate Tamper Detection code is identified.,RegexAnd,,,,,"""- import dexguard\.util
+    - CertificateChecker\.checkCertificate""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#mobile-app-tampering-and-reverse-engineering,',,0.0,,,,
+android_package_tamper,The App may use package signature for tamper detection.,RegexAnd,,,,,"""- PackageManager\.GET_SIGNATURES
+    - getPackageName\(""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04c-Tampering-and-Reverse-Engineering.md#mobile-app-tampering-and-reverse-engineering,',,0.0,,,,
+android_safetynet,This App uses SafetyNet API.,Regex,,,,,"""com.google\.android\.gms\.safetynet\.SafetyNetApi""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#safetynet,',,0.0,,,,
+android_su_detect,This App may request root (Super User) privileges.,RegexOr,,,,,"""- com\.noshufou\.android\.su
+    - com\.thirdparty\.superuser
+    - eu\.chainfire\.supersu
+    - com\.koushikdutta\.superuser
+    - eu\.chainfire\.
+    - com\.saurik\.substrate
+    - de\.robv\.android\.xposed\.installer""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-root-detection-mstg-resilience-1,cwe-250,,0.0,,,,
+android_jackson_deserialize,">-
+    The app uses jackson deserialization library. Deserialization of untrusted
+    input can result in arbitrary code execution.",RegexAnd,,,,,"""- com\.fasterxml\.jackson\.databind\.ObjectMapper
+    - \.enableDefaultTyping\(""",exact,high,,cwe-502,,7.5,,,,
+android_aes_ecb,">-
+    The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is
+    known to be weak as it results in the same ciphertext for identical blocks
+    of plaintext.",Regex,,,,,"""Cipher\.getInstance\(\s*""\s*AES\/ECB""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#weak-block-cipher-mode,cwe-327,,5.9,,,,
+android_aws_ecb_default,">-
+    Calling Cipher.getInstance(""AES"") will return AES ECB mode by default. ECB mode is
+    known to be weak as it results in the same ciphertext for identical blocks
+    of plaintext.",Regex,,,,,"""Cipher\.getInstance\(""AES""\)""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#weak-block-cipher-mode,cwe-327,,5.9,,,,
+android_rsa_no_oaep,">-
+    This App uses RSA Crypto without OAEP padding. The purpose of the padding
+    scheme is to prevent a number of attacks on RSA that only work when the
+    encryption is performed without padding.",Regex,,,,,"""Cipher\.getinstance\(\""rsa/.{1,48}/nopadding""",lower,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#mobile-app-cryptography,cwe-780,,5.9,,,,
+android_world_writable,The file or SharedPreference is World Writable. Any App can write to the file,RegexOr,,,,,"""- MODE_WORLD_WRITABLE
+    - \.getSharedPreferences\(.{0,50}2\)
+    - 'openFileOutput\(\s*"".{1,48}""\s*,\s*2\s*\)'""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-local-storage-for-sensitive-data-mstg-storage-1-and-mstg-storage-2,cwe-276,,6.0,,,,
+android_world_readable,The file or SharedPreference is World Readable. Any App can read from the file,RegexOr,,,,,"""- MODE_WORLD_READABLE
+    - \.getSharedPreferences\(.{0,50}1\)
+    - 'openFileOutput\(\s*"".{1,48}""\s*,\s*1\s*\)'""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-local-storage-for-sensitive-data-mstg-storage-1-and-mstg-storage-2,cwe-276,,4.0,,,,
+android_world_read_write,The file is World Readable and Writable. Any App can read/write to the file,Regex,,,,,"""'openFileOutput\(\s*"".{1,48}""\s*,\s*3\s*\)'""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-local-storage-for-sensitive-data-mstg-storage-1-and-mstg-storage-2,cwe-276,,6.0,,,,
+android_weak_hash,Weak Hash algorithm used,RegexOr,,,,,"""- \.getInstance\(.{0,48}md4
+    - \.getInstance\(.{0,48}MD4""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms-mstg-crypto-4,cwe-327,,7.4,,,,
+android_weak_ciphers,Weak Encryption algorithm used,RegexOr,,,,,"""- \.getInstance\(.{0,48}rc2
+    - \.getInstance\(.{0,48}RC2
+    - \.getInstance\(.{0,48}rc4
+    - \.getInstance\(.{0,48}RC4
+    - \.getInstance\(.{0,48}blowfish
+    - \.getInstance\(.{0,48}BLOWFISH
+    - Cipher\.getInstance\(.{0,48}DES
+    - Cipher\.getInstance\(.{0,48}des""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms-mstg-crypto-4,cwe-327,,7.4,,,,
+cbc_padding_oracle,The App uses the encryption mode CBC with PKCS5/PKCS7 padding. This configuration is vulnerable to padding oracle attacks.,RegexOr,,,,,"""- \.getInstance\(.{0,48}\/CBC\/PKCS5Padding
+    - \.getInstance\(.{0,48}\/CBC\/PKCS7Padding""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms-mstg-crypto-4,cwe-649,,7.4,,,,
+android_md5,MD5 is a weak hash known to have hash collisions.,RegexOr,,,,,"""- \.getInstance\(.{0,48}MD5
+    - \.getInstance\(.{0,48}md5
+    - DigestUtils\.md5\(""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms-mstg-crypto-4,cwe-327,,7.4,,,,
+android_sha1,SHA-1 is a weak hash known to have hash collisions.,RegexOr,,,,,"""- \.getInstance\(.{0,48}SHA-1
+    - \.getInstance\(.{0,48}sha-1
+    - \.getInstance\(.{0,48}SHA1
+    - \.getInstance\(.{0,48}sha1
+    - DigestUtils\.sha\(""",exact,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms-mstg-crypto-4,cwe-327,,5.9,,,,
+android_weak_iv,">-
+    The App may use weak IVs like ""0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00"" or
+    ""0x01,0x02,0x03,0x04,0x05,0x06,0x07"". Not using a random IV makes the
+    resulting ciphertext much more predictable and susceptible to a dictionary
+    attack.",RegexOr,,,,,"""- '0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00'
+    - '0x01,0x02,0x03,0x04,0x05,0x06,0x07'""",exact,high,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#mobile-app-cryptography,cwe-329,,9.8,,,,
+android_detect_root,This App may have root detection capabilities.,RegexOr,,,,,"""- \.contains\(""test-keys""\)
+    - \/system\/app\/Superuser.apk
+    - isDeviceRooted\(\)
+    - \/system\/bin\/failsafe\/su
+    - \/system\/bin\/su
+    - \/system\/xbin\/su
+    - \/sbin\/su
+    - \/system\/sd\/xbin\/su
+    - '""\/system\/xbin\/which"", ""su""'
+    - RootTools\.isAccessGiven\(\)""",exact,good,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-root-detection-mstg-resilience-1,',,0.0,,,,
+android_hardcoded,">-
+    Files may contain hardcoded sensitive information like usernames,
+    passwords, keys etc.",Regex,,,,,""">-
+    (password\s*=\s*[\'|\""].{1,100}[\'|\""]\s{0,5})|(pass\s*=\s*[\'|\""].{1,100}[\'|\""]\s{0,5})|(username\s*=\s*[\'|\""].{1,100}[\'|\""]\s{0,5})|(secret\s*=\s*[\'|\""].{1,100}[\'|\""]\s{0,5})|(key\s*=\s*[\'|\""].{1,100}[\'|\""]\s{0,5})""",lower,warning,https://github.com/MobSF/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#checking-memory-for-sensitive-data-mstg-storage-10,cwe-312,,7.4,,,,
+FCS_RBG_EXT.1.1,Random Bit Generation Services,code,or,,,,"""- - java\.security\.SecureRandomSpi
+      - implement DRBG functionality
+    - - java\.security\.SecureRandom
+      - invoke platform-provided DRBG functionality
+    - - java\.util\.Random
+      - use no DRBG functionality""",,,,,,,,,,
+FCS_STO_EXT.1.1,Storage of Credentials,code,or,,,,"""- - android\.security\.KeyChain
+      - >-
+        invoke the functionality provided by the platform to securely store
+        credentials""",,,,,,,,,,
+FCS_CKM_EXT.1.1,Cryptographic Key Generation Services,code,or,,,,"""- - java\.security\.KeyPairGenerator|KeyPairGenerator\.getInstance\(
+      - implement asymmetric key generation""",,,,,,,,,,
+FDP_DEC_EXT.1.1,Access to Platform Resources,manifest,all,,,,"""- - 'android\.permission\.(?:INTERNET|ACCESS_NETWORK_STATE)'
+      - network connectivity
+    - - android\.permission\.CAMERA
+      - camera
+    - - android\.permission\.RECORD_AUDIO
+      - microphone
+    - - 'android\.permission\.ACCESS_(?:COARSE|FINE)_LOCATION'
+      - location
+    - - android\.permission\.NFC
+      - NFC
+    - - 'android\.hardware\.usb\.(?:host|action\.USB_DEVICE_ATTACHED)'
+      - USB
+    - - android\.permission\.BLUETOOTH
+      - bluetooth""",,,,,,,,,,
+FDP_DEC_EXT.1.2,Access to Platform Resources,manifest,all,,,,"""- - android\.permission\.READ_CONTACTS
+      - address book
+    - - 'android\.permission\.(?:READ|WRITE)_CALENDAR'
+      - calendar
+    - - android\.permission\.READ_CALL_LOG
+      - call lists
+    - - android\.permission\.READ_LOGS
+      - system logs""",,,,,,,,,,
+FDP_NET_EXT.1.1,Network Communications,manifest,or,,,,"""- - android\.permission\.INTERNET
+      - user/application initiated network communications""",,,,,,,,,,
+FDP_DAR_EXT.1.1,Encryption Of Sensitive Application Data,code,or,,,,"""- - 'androidx\.security\.crypto\.(?:EncryptedFile|EncryptedSharedPreferences)'
+      - leverage platform-provided functionality to encrypt sensitive data
+    - - javax\.crypto\.Cipher|net\.sqlcipher\.|\.encryptionKey\(
+      - implement functionality to encrypt sensitive data""",,,,,,,,,,
+FMT_MEC_EXT.1.1,Supported Configuration Mechanism,code,or,,,,"""- - android\.content\.SharedPreferences|crypto\.EncryptedSharedPreferences
+      - null""",,,,,,,,,,
+FTP_DIT_EXT.1.1,Protection of Data in Transit,code,or,,,,"""- - >-
+        (?:https|ssh|scp|sftp)://|\.getInstance\(\""TLS\""\)|CkSsh\(|com\.jcraft\.jsch\.JSch
+      - encrypt some transmitted data with HTTPS/TLS/SSH""",,,,,,,,,,
+"FCS_RBG_EXT.2.1,FCS_RBG_EXT.2.2'",Random Bit Generation from Application,code,or,,,,"""- - java\.security\.SecureRandom
+      - null""",,,,,,,,,,
+FCS_CKM.1.1(1),Cryptographic Asymmetric Key Generation,code,and,,,,"""- - - 'java\.security\.KeyPairGenerator|\.getInstance\(.{0,48}(?:RSA|rsa)'
+        - 512|768|1024
+      - >-
+        not in accordance with FCS_CKM.1.1(1) using key generation algorithm RSA
+        schemes and cryptographic key sizes of 1024-bit or lower
+    - - - 'java\.security\.KeyPairGenerator|\.getInstance\(.{0,48}(?:RSA|rsa)'
+        - 2048|3072|4096
+      - >-
+        in accordance with a specified cryptographic key generation algorithm
+        RSA schemes using cryptographic key sizes of 2048-bit or greater""",,,,,,,,,,
+"FCS_CKM.1.1(3),FCS_CKM.1.2(3)'",Password Conditioning,code,or,,,,"""- - \.getInstance\(\""PBKDF2|PBEKeySpec\(.{0,48}?\)
+      - in accordance with a specified cryptographic algorithm.""",,,,,,,,,,
+FCS_COP.1.1(1),Cryptographic Operation - Encryption/Decryption,code,or,,,,"""- - '\.getInstance\(.{0,48}(?:AES/ECB/|/aes/ecb/|AES/CTR/|aes/ctr/)'
+      - 'not in accordance with FCS_COP.1.1(1), AES-ECB mode is being used'
+    - - '\.getInstance\(.{0,48}(?:AES/CBC/|aes/cbc|AES/GCM/|aes/gcm/)'
+      - >-
+        in accordance with a specified cryptographic algorithm AES-CBC (as
+        defined in NIST SP 800-38A) mode or AES-GCM (as defined in NIST SP
+        800-38D) and cryptographic key sizes 256-bit/128-bit""",,,,,,,,,,
+FCS_COP.1.1(2),Cryptographic Operation - Hashing,code,or,,,,"""- - 'DigestUtils\.md5\(|\.getInstance\(.{0,48}(?:md4|md5|rc2|rc4|RC4|RC2|MD4|MD5)'
+      - >-
+        not in accordance with FCS_COP.1.1(2) and uses the cryptographic
+        algorithm RC2/RC4/MD4/MD5
+    - - >-
+        \.getInstance\(.{0,48}(?:\.SHA1|\.SHA256|\.SHA384|\.SHA512|SHA-1|SHA-256|SHA-384|SHA-512|sha-1|sha-256|sha-384|sha-512)
+      - >-
+        in accordance with a specified cryptographic algorithm
+        SHA-1/SHA-256/SHA-384/SHA-512 and message digest sizes 160/256/384/512
+        bits""",,,,,,,,,,
+FCS_COP.1.1(3),Cryptographic Operation - Signing,code,and,,,,"""- - - >-
+          \.VerifyStringENC|\.signStringENC|\.signHashENC|\.initVerify\(|\.verify\(|\.initSign\(|\.sign\(
+        - 'CkRsa\(|\.getInstance\(.{0,48}(?:RSA|rsa)'
+      - RSA schemes using cryptographic key sizes of 2048-bit or greater
+    - - - >-
+          \.VerifyStringENC|\.signStringENC|\.signHashENC|\.initVerify\(|\.verify\(|\.initSign\(|\.sign\(
+        - 'CkEcc\(|\.getInstance\(.{0,48}(?:ECDSA|ecdsa)'
+      - 'ECDSA schemes using ""NIST curves"" P-256, P-384'""",,,,,,,,,,
+FCS_COP.1.1(4),Cryptographic Operation - Keyed-Hash Message Authentication,code,all,,,,"""- - \.getInstance\(*.HmacSHA256|put_HashAlgorithm\(\""SHA-256
+      - HMAC-SHA-256
+    - - \.getInstance\(*.HmacSHA1|put_HashAlgorithm\(\""SHA-1
+      - HMAC-SHA1
+    - - \.getInstance\(*.HmacSHA512|put_HashAlgorithm\(\""SHA-512
+      - HMAC-SHA-512
+    - - \.getInstance\(*.HmacSHA384|put_HashAlgorithm\(\""SHA-384
+      - HMAC-SHA-384
+    - - \.getInstance\(*.HmacMD5|put_HashAlgorithm\(\""MD5
+      - HMAC-MD5""",,,,,,,,,,
+FCS_HTTPS_EXT.1.1,HTTPS Protocol,code,or,,,,"""- - Scheme \(\""https
+      - null
+    - - HttpsURLConnection
+      - null""",,,,,,,,,,
+FCS_HTTPS_EXT.1.2,HTTPS Protocol,code,or,,,,"""- - \.getInstance\(.{0,48}TLS|HttpsURLConnection| Scheme \(\""https
+      - null
+    - - \.tlsVersions\(TlsVersion
+      - null""",,,,,,,,,,
+FCS_HTTPS_EXT.1.3,HTTPS Protocol,code,or,,,,"""- - >-
+        SSLPeerUnverifiedException\(|CertificateException|\(.{0,48}SSLException|CertPathValidatorException
+      - >-
+        not establish the connection or request application authorization to
+        establish the connection""",,,,,,,,,,
+FIA_X509_EXT.1.1,X.509 Certificate Validation,code,all,,,,"""- - X509HostnameVerifier
+      - RFC 5280 certificate validation and certificate path validation
+    - - checkClientTrusted
+      - The certificate path must terminate with a trusted CA certificate
+    - - \.getBasicConstraints\(\).{0,48}0|\.getBasicConstraints\(\) >.{0,48} -1
+      - >-
+        The application validate a certificate path by ensuring the presence of
+        the basicConstraints extension and that the CA flag is set to TRUE for
+        all CA certificates
+    - - \.isRevoked\(|\(PKIXRevocationChecker
+      - >-
+        The application validate the revocation status of the certificate using
+        the Online Certificate Status Protocol (OCSP) as specified in RFC 2560
+        or a Certificate Revocation List (CRL) as specified in RFC 5759 or an
+        OCSP TLS Status Request Extension (i.e., OCSP stapling) as specified in
+        RFC 6066""",,,,,,,,,,
+FIA_X509_EXT.1.2,X.509 Certificate Validation,code,or,,,,"""- - \.getBasicConstraints\(\).{0,48}0|\.getBasicConstraints\(\) >.{0,48} -1
+      - null""",,,,,,,,,,
+FIA_X509_EXT.2.1,X.509 Certificate Validation,code,or,,,,"""- - java\.security\.cert\.X509Certificate
+      - null""",,,,,,,,,,
+FIA_X509_EXT.2.2,X.509 Certificate Authentication,code,and,,,,"""- - - java\.security\.cert\.X509Certificate
+        - \.checkValidity\(
+        - CertificateExpiredException|CertificateNotYetValidException
+      - null""",,,,,,,,,,
+FPT_TUD_EXT.2.1,Integrity for Installation and Update,code,or,,,,"""- - \.enableInstallerId\(InstallerID\.GOOGLE_PLAY
+      - null
+    - - \.getInstallerPackageName\(
+      - null""",,,,,,,,,,
+FCS_CKM.1.1(2),Cryptographic Symmetric Key Generation,code,and,,,,"""- - - javax\.crypto\.KeyGenerator
+        - KeyProperties\.KEY_ALGORITHM_AES|\.setKeySize\(256|\.setKeySize\(128
+        - \.generateKey\(
+      - null
+    - - - SecureRandom\(
+        - \.generateSecret\(|SecretKeySpec\(.{0,48}AES
+      - null""",,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,

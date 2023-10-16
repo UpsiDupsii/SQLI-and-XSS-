@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Error</title>
+{% endblock %}
+
+{% block content %}
+<h1>Query: <abbr>{{search}}<abbr></h1>
+<h3><i>SQLI / XSS Detected! Please Enter a Valid Search query</i></h3>
+<style>
+    h1, h3{
+        margin: 50px;
+        text-align: center;
+    }
+    abbr{
+        color: blue;
+    }
+</style>
+{% endblock %}
